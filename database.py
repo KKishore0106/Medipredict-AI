@@ -5,10 +5,7 @@ import logging
 from datetime import datetime
 from bson.objectid import ObjectId
 from pymongo import MongoClient
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+from config import Config
 
 logger = logging.getLogger(__name__)
 
@@ -23,14 +20,14 @@ class DatabaseManager:
     def initialize_db(self):
         """Initialize database connection."""
         try:
-            # Get connection string from environment
-            mongo_uri = os.environ.get('MONGODB_URI')
+            # Get connection string from config
+            mongo_uri = Config.MONGODB_URI
             if not mongo_uri:
-                logger.error('MONGODB_URI not found in environment variables.')
+                logger.error('MONGODB_URI not found in configuration.')
                 return False
                 
-            # Get database name from environment
-            db_name = os.environ.get('MONGODB_DB_NAME', 'medi_predict')
+            # Get database name from config
+            db_name = Config.MONGODB_DB_NAME
             
             self.client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
             self.db = self.client[db_name]

@@ -3,6 +3,7 @@ import os
 import json
 import groq
 from dotenv import load_dotenv
+from config import Config
 from system_prompts import SYSTEM_PROMPTS
 
 # Load environment variables
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 class LLMProcessor:
     def __init__(self):
         try:
-            api_key = os.environ.get('GROQ_API_KEY')
+            api_key = Config.GROQ_API_KEY
             if not api_key:
                 logger.error('GROQ_API_KEY not found in environment variables.')
                 self.client = None

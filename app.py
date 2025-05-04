@@ -222,6 +222,23 @@ def profile():
 def settings():
     return render_template('settings.html')
 
+@app.route('/api/chat', methods=['POST'])
+@login_required
+def api_chat():
+    """Process chat message using Groq API."""
+    try:
+        data = request.json
+        if not data or 'message' not in data:
+            return jsonify({'error': 'Message is required'}), 400
+
+        # Process message using Groq
+        response = process_message_with_llm(data)
+        
+        return jsonify(response)
+    except Exception as e:
+        logger.error(f'API chat error: {str(e)}')
+        return jsonify({'error': 'Internal server error'}), 500
+
 @app.route('/update_password', methods=['POST'])
 @login_required
 def update_password():
