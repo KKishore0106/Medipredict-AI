@@ -19,7 +19,7 @@ class LLMProcessor:
                 logger.error('GROQ_API_KEY not found in environment variables.')
                 self.client = None
             else:
-                self.client = groq.Client(api_key=api_key)
+                self.client = groq.Client(api_key=api_key,proxies=None)
         except Exception as e:
             logger.error(f'Error initializing Groq client: {e}')
             self.client = None
