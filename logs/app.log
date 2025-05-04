@@ -284,3 +284,13 @@ pymongo.errors.OperationFailure: bad auth : Authentication failed., full error: 
 2025-05-04 13:33:42,948 - engineio.server - INFO - Server initialized for threading.
 2025-05-04 13:33:44,147 - werkzeug - WARNING -  * Debugger is active!
 2025-05-04 13:33:44,151 - werkzeug - INFO -  * Debugger PIN: 118-518-064
+2025-05-04 13:58:12,563 - engineio.server - INFO - Server initialized for threading.
+2025-05-04 13:58:14,336 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.7:5000
+2025-05-04 13:58:14,337 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 13:58:14,338 - werkzeug - INFO -  * Restarting with stat
+2025-05-04 13:58:17,538 - engineio.server - INFO - Server initialized for threading.
+2025-05-04 13:58:18,621 - werkzeug - WARNING -  * Debugger is active!
+2025-05-04 13:58:18,631 - werkzeug - INFO -  * Debugger PIN: 118-518-064
