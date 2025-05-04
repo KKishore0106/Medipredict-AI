@@ -8,6 +8,8 @@ gunicorn==21.2.0
 gevent==23.7.0
 greenlet==3.0.2
 python-dotenv==1.0.0
+pytz==2023.3
+
 
 # Database
 groq==0.4.1
