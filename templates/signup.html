@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - MediPredict</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+<body class="bg-gradient-to-b from-gray-50 to-white">
+    {% include 'header.html' %}
+    <div class="main-content">
+        <div class="signup-form">
+            <div class="text-center mb-6">
+                <div class="avatar mb-5">
+                    <i class="fas fa-user-plus text-white text-xl"></i>
+                </div>
+                <h1>Create your account</h1>
+                <p>Already have an account? <a href="{{ url_for('login') }}" class="text-blue-700 hover:text-blue-700">Sign in</a></p>
+            </div>
+            <form id="signupForm" class="space-y-3.5 px-6" action="{{ url_for('signup') }}" method="POST">
+                <div class="input-group">
+                    <input id="signupFullName" name="full_name" type="text" required 
+                           class="form-input" 
+                           placeholder="Full Name">
+                </div>
+
+                <div class="input-group">
+                    <input id="signupEmail" name="email" type="email" required 
+                           class="form-input" 
+                           placeholder="Email address">
+                </div>
+
+                <div class="input-group">
+                    <input id="signupPassword" name="password" type="password" required 
+                           class="form-input" 
+                           placeholder="Password">
+                    <span class="toggle-password" onclick="togglePassword('signupPassword')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="password-strength-indicator">
+                    <span id="password-strength" class="text-sm"></span>
+                </div>
+
+                <div class="input-group">
+                    <input id="signupConfirmPassword" name="confirm_password" type="password" required 
+                           class="form-input" 
+                           placeholder="Confirm Password">
+                    <span class="toggle-password" onclick="togglePassword('signupConfirmPassword')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                    <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
+                </div>
+
+                <button type="submit" class="w-full signup-button">
+                    Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

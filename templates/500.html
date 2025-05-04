@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Internal Server Error{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <h1>500 - Internal Server Error</h1>
+    <p>We apologize, but something went wrong on our end.</p>
+    {% if error %}
+    <p class="error-details">Error details: {{ error }}</p>
+    {% endif %}
+    <div class="error-actions">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Homepage</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-secondary">Contact Support</a>
+    </div>
+</div>
+
+<style>
+.error-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.error-details {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    color: #721c24;
+}
+
+.error-actions {
+    margin-top: 2rem;
+}
+
+.error-actions .btn {
+    margin: 0 0.5rem;
+}
+</style>
+{% endblock %}

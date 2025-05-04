@@ -1,0 +1,61 @@
+{% extends 'header.html' %}
+
+{% block header %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash-messages.css') }}">
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+    <div class="container">
+        <div class="content-wrapper">
+            {% include '_flash_messages.html' %}
+            <h1 class="text-2xl font-bold">Account Settings</h1>
+            
+            <div class="flex justify-start items-center mb-6">
+                <a href="{{ url_for('dashboard') }}" class="back-button flex items-center">
+                    <i class="fas fa-arrow-left text-gray-600 mr-2"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+            </div>
+            
+            <div class="section profile-section">
+                <h2>Profile Information</h2>
+                <form class="form" action="{{ url_for('profile') }}" method="POST">
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>    
+                        <input type="text" name="full_name" id="full_name" class="input-field" value="{{ current_user.name() }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="input-field" value="{{ current_user.email }}">
+                    </div>
+                    
+                    <button type="submit" class="primary-button">Update Profile</button>
+                </form>
+            </div>
+
+            <div class="section security-section">
+                <h2>Security</h2>
+                <form class="form" action="{{ url_for('update_password') }}" method="POST">
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <input type="password" name="current_password" id="current_password" class="input-field">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <input type="password" name="new_password" id="new_password" class="input-field">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm New Password</label>
+                        <input type="password" name="confirm_password" id="confirm_password" class="input-field">
+                    </div>
+                    
+                    <button type="submit" class="primary-button">Change Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

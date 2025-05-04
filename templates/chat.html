@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPredict AI chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chats.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash-messages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar-dropdown.css') }}">
+</head>
+<body>
+    <input type="hidden" id="user-id" value="{{ user_id }}">
+    
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="title-container">
+                    <h1 class="title">MediPredict AI</h1>
+                </div>
+                <!-- Sidebar Toggle Button -->
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="button-container">
+                <button onclick="startNewConversation()" class="new-convo-btn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Conversation</span>
+                </button>
+            </div>
+
+            <div class="sidebar-divider"></div>
+            <div class="recent-chats-header">
+                <h2 class="recent-title">Recent Chats</h2>
+            </div>
+            <div class="recent-chats-section">
+                <div id="recent-chats" class="recent-chats-list">
+                    <!-- Recent chat items will be dynamically added here -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="footer-content">
+                    <div class="user-menu">
+                        <div class="avatar-dropdown-container">
+                            <div class="avatar-dropdown-toggle" tabindex="0">
+                                <img src="{{ current_user.avatar_url }}" alt="User Avatar" class="user-avatar">
+                                <span class="user-name">{{ current_user.full_name }}</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        <div class="avatar-dropdown-menu hidden">
+                            <a href="{{ url_for('dashboard') }}" class="dropdown-menu-item">
+                                <div class="menu-item-content">
+                                    <i class="fas fa-home"></i>
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                            <a href="{{ url_for('prediction') }}" class="dropdown-menu-item">
+                                <div class="menu-item-content">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Prediction</span>
+                                </div>
+                            </a>
+                            <a href="{{ url_for('logout') }}" class="dropdown-menu-item">
+                                <div class="menu-item-content">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="flex">
+                {% include '_flash_messages.html' %}
+          
+              <!-- Chat Area -->
+              <div class="chat-area">
+                <!-- Chat Messages Container -->
+                <div class="chat-messages-container">
+                </div>
+                
+                <!-- Chat Message Templates -->
+                <template id="user-message-template">
+                  <div class="message user-message">
+                    <div class="message-content">
+                      <p class="message-text"></p>
+                      <span class="timestamp"></span>
+                    </div>
+                  </div>
+                </template>
+                
+                <template id="ai-message-template">
+                  <div class="message-container">
+                    <div class="ai-bubble-icon">
+                      <svg class="ai-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#2563eb"/>
+                        <rect x="10" y="13" width="20" height="14" rx="3" fill="white"/>
+                        <polygon points="16,27 16,31 20,27" fill="white"/>
+                        <circle cx="16" cy="20" r="1.5" fill="#2563eb"/>
+                        <circle cx="20" cy="20" r="1.5" fill="#2563eb"/>
+                        <circle cx="24" cy="20" r="1.5" fill="#2563eb"/>
+                      </svg>
+                    </div>
+                    <div class="message bot-message">
+                      <div class="message-content">
+                        <p class="message-text"></p>
+                        <span class="timestamp"></span>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                
+                <!-- Chat Input Section -->
+                <div class="chat-input-container">
+                  <div class="input-container">
+                    <input type="text" 
+                           id="message-input" 
+                           class="message-input" 
+                           placeholder="Type your message...">
+                    <button onclick="sendMessage()" class="send-button">
+                      <i class="fas fa-arrow-up sendicon"></i>
+                      <span class="send-text"></span>
+                      <div class="send-loading hidden">
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+            </template>
+          
+          </main>
+
+    <!-- Socket.IO Client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat-sidebar-toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/avatar-dropdown.js') }}"></script>
+</body>
+</html>

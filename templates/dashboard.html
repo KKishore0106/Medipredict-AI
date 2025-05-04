@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash-messages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar-dropdown.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPredict AI Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-toggle.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/avatar-dropdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sidebar-toggle.js') }}"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        {% include '_sidebar.html' %}
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Static Header -->
+            <header class="dashboard-header">
+                <div class="header-container">
+                    <div class="header-content">
+                        <div class="header-title">
+                            <h1>Dashboard Overview</h1>
+                        </div>
+                        <div class="header-actions">
+                            <div class="search-container">
+                                <div class="search-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <input type="text" 
+                                       id="search-input" 
+                                       class="search-input" 
+                                       placeholder="Search dashboard...">
+                            </div>
+                            <div class="user-menu">
+                                <div class="avatar-dropdown-container">
+                                    <div class="avatar-dropdown-toggle" tabindex="0">
+                                        <img src="{{ generate_letter_avatar(current_user.full_name) }}" alt="User Avatar" class="user-avatar">
+                                        <span class="user-name">{{ current_user.name() }}</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="avatar-dropdown-menu hidden">
+                                        <a href="{{ url_for('logout') }}" class="dropdown-menu-item">
+                                            <div class="menu-item-content">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                <span>Logout</span>
+                                            </div>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="content-container">
+                    {% include '_flash_messages.html' %}
+                    <!-- Metrics and Chart Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Metrics Cards - First Column -->
+                        <div class="metrics-section">
+                            <!-- Total Predictions -->
+                            <div class="dashboard-card card-blue">
+                                <div class="stat-card">
+                                    <div class="stat-info">
+                                        <p class="stat-label">Total Predictions</p>
+                                        <p class="stat-value" id="total-predictions-value">{{ metrics.prediction_frequency|length }}</p>
+                                    </div>
+                                    <div class="stat-icon blue">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Accuracy Score -->
+                            <div class="dashboard-card card-green">
+                                <div class="stat-card">
+                                    <div class="stat-info">
+                                        <p class="stat-label">Accuracy Score</p>
+                                        <p class="stat-value" id="accuracy-score-value">{{ "%.1f"|format(metrics.accuracy.overall) }}%</p>
+                                    </div>
+                                    <div class="stat-icon green">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Most Common Predictions -->
+                            <div class="dashboard-card card-purple">
+                                <div class="stat-card">
+                                    <div class="stat-info">
+                                        <p class="stat-label">Most Common Predictions</p>
+                                        <div id="common-predictions" class="prediction-list">
+                                            {% for condition in metrics.most_predicted %}
+                                            <div class="prediction-item">
+                                                <span class="prediction-name">{{ condition._id }}</span>
+                                                <span class="prediction-count">{{ condition.count }} times</span>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="stat-icon purple">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prediction Activity Chart - Second Column -->
+                        <div class="charts-section">
+                            <div class="dashboard-card">
+                                <div class="chart-container">
+                                    <canvas id="predictionTrendsChart" width="800" height="400"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Socket.IO
+        const socket = io();
+    </script>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('nav.sidebar');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    });
+    </script>
+</body>
+</html>

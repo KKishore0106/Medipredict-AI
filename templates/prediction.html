@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar-dropdown.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPredict AI - Predictions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-toggle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash-messages.css') }}">
+
+</head>
+<body>
+    <div class="prediction-container">
+        {% include '_sidebar.html' %}
+      <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Static Header -->
+            <header class="prediction-header">
+                <div class="header-container">
+                    <div class="header-content">
+                        <div class="header-title">
+                            <h1>Predictions</h1>
+                        </div>
+                        <div class="header-actions">
+                            <div class="search-container">
+                                <div class="search-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <input type="text" id="search-input" class="search-input bg-transparent outline-none text-gray-700" placeholder="Search predictions...">
+                            </div>
+                            <div class="user-menu">
+                                <div class="avatar-dropdown-container">
+                                    <div class="avatar-dropdown-toggle" tabindex="0">
+                                        <img src="{{ generate_letter_avatar(current_user.full_name) }}" alt="User Avatar" class="user-avatar">
+                                        <span class="user-name">{{ current_user.full_name }}</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="avatar-dropdown-menu hidden">
+                                        <a href="{{ url_for('logout') }}" class="dropdown-menu-item">
+                                            <div class="menu-item-content">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                <span>Logout</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </header>
+    
+<!-- Main Content -->
+            <main class="prediction-content">
+                <div class="content-container">
+                    {% include '_flash_messages.html' %}
+                    <div class="predictions-table-container">
+                    <table class="predictions-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Disease</th>
+                                    <th>Confidence</th>
+                                    <th>Result</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="predictions-tbody">
+                                <!-- Rows will be added dynamically via Socket.IO -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Loading state -->
+                        <div id="loading-state" class="text-center py-6">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+                            <p class="mt-4 text-gray-500">Loading predictions...</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Socket.IO Client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/avatar-dropdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sidebar-toggle.js') }}"></script>
+
+</body>
+</html>

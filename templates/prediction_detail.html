@@ -1,0 +1,161 @@
+{% extends "header.html" %}
+
+{% block header %}
+    {{ super() }}
+    <div class="prediction-detail-container">
+    <div class="prediction-header">
+        <h2>Disease Prediction Details</h2>
+        <div class="back-button">
+            <a href="{{ url_for('prediction') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Predictions
+            </a>
+        </div>
+    </div>
+
+    <div class="disease-predictions">
+        <!-- Basic Prediction Information -->
+        <div class="section prediction-info">
+            <h3>Prediction Information</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Prediction ID:</label>
+                    <span>{{ prediction.id }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Disease Type:</label>
+                    <span class="disease-type">{{ prediction.disease_type|title }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Confidence Score:</label>
+                    <span class="confidence-score">{{ "%.2f"|format(prediction.confidence * 100) }}%</span>
+                </div>
+                <div class="info-item">
+                    <label>Prediction Result:</label>
+                    <span class="prediction-result">{{ prediction.prediction }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Created At:</label>
+                    <span>
+                        <span class="date">{{ prediction.created_at.strftime('%Y-%m-%d') }}</span>
+                        <br>
+                        <span class="time">{{ prediction.created_at.strftime('%H:%M') }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parameters Used -->
+        <div class="section parameters">
+            <h3>Parameters Used</h3>
+            <div class="parameters-list">
+                {% for param, value in prediction.parameters.items() %}
+                <div class="parameter-item">
+                    <label>{{ param|replace('_', ' ')|title }}:</label>
+                    <span>{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Follow-Up Questions -->
+        <div class="section follow-up-questions">
+            <h3>Follow-Up Questions</h3>
+            <div class="questions-list">
+                {% for question in prediction.follow_up_questions %}
+                <div class="question-item">
+                    <div class="question-text">{{ question.text }}</div>
+                    <div class="question-answer">{{ question.answer }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="section recommendations">
+            <h3>Medical Recommendations</h3>
+            <div class="recommendations-list">
+                {% for rec in prediction.recommendations %}
+                <div class="recommendation-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ rec }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const predictionId = urlParams.get('prediction_id');
+    
+    if (!predictionId) {
+        window.location.href = '/predictions';
+        return;
+    }
+
+    // Fetch prediction details
+    fetch(`/api/prediction/${predictionId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'error') {
+                throw new Error(data.message);
+            }
+
+            const prediction = data.prediction;
+            
+            // Update prediction information
+            document.querySelector('.disease-type').textContent = prediction.disease_type;
+            document.querySelector('.confidence-score').textContent = `${(prediction.confidence * 100).toFixed(2)}%`;
+            document.querySelector('.prediction-result').textContent = prediction.prediction;
+            document.querySelector('.date').textContent = prediction.created_at.split(' ')[0];
+            document.querySelector('.time').textContent = prediction.created_at.split(' ')[1];
+
+            // Update parameters
+            const parametersList = document.querySelector('.parameters-list');
+            parametersList.innerHTML = '';
+            Object.entries(prediction.parameters).forEach(([param, value]) => {
+                const paramItem = document.createElement('div');
+                paramItem.className = 'parameter-item';
+                paramItem.innerHTML = `
+                    <label>${param.replace('_', ' ').replace(/\w+/g, w => w[0].toUpperCase() + w.substr(1))}:</label>
+                    <span>${value}</span>
+                `;
+                parametersList.appendChild(paramItem);
+            });
+
+            // Update follow-up questions
+            const questionsList = document.querySelector('.questions-list');
+            questionsList.innerHTML = '';
+            prediction.follow_up_questions.forEach(question => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'question-item';
+                questionItem.innerHTML = `
+                    <div class="question-text">${question.text}</div>
+                    <div class="question-answer">${question.answer}</div>
+                `;
+                questionsList.appendChild(questionItem);
+            });
+
+            // Update recommendations
+            const recommendationsList = document.querySelector('.recommendations-list');
+            recommendationsList.innerHTML = '';
+            prediction.recommendations.forEach(rec => {
+                const recItem = document.createElement('div');
+                recItem.className = 'recommendation-item';
+                recItem.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>${rec}</span>
+                `;
+                recommendationsList.appendChild(recItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error loading prediction details');
+            window.location.href = '/predictions';
+        });
+});
+</script>
+{% endblock %}

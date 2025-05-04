@@ -1,0 +1,53 @@
+{% block header %}
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash-messages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar-dropdown.css') }}">
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1 class="site-title">MediPredict AI</h1>
+            </div>
+            <div class="nav-right">
+                {% if request.endpoint not in ['settings', 'prediction_detail'] %}
+                    <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('features') }}" class="nav-link">Features</a>
+                    <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                    <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+                    {% if not is_authenticated %}
+                        <a href="{{ url_for('login')}}" class="nav-link">Login</a>
+                        <a href="{{ url_for('signup') }}" class="btn-primary">Sign Up</a>
+                    {% else %}
+                        <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+                        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages-container">
+            {% for category, message in messages %}
+                <div class="flash-message {% if category == 'success' %}flash-success{% endif %}{% if category == 'error' %}flash-error{% endif %}{% if category == 'warning' %}flash-warning{% endif %}{% if category == 'info' %}flash-info{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/avatar-dropdown.js') }}"></script>
+
+    {% endblock %}

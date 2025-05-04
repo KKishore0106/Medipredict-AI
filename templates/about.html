@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPredict AI - About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <main class="container">
+        <section class="hero">
+            <h1>About Us</h1>
+            <div class="content">
+                <h2>Our Mission</h2>
+                <p>We're dedicated to making healthcare more accessible and accurate through AI technology.</p>
+                <p>Our team of experts combines medical knowledge with cutting-edge AI to create solutions that truly make a difference.</p>
+            </div>
+        </section>
+
+        <section class="disease-predictions">
+            <h2>Our Disease Prediction Capabilities</h2>
+            <div class="grid">
+                <article class="prediction-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Diabetes Prediction</h3>
+                    <p>Early detection of diabetes risk factors using machine learning.</p>
+                    <span class="accuracy">95% Accuracy</span>
+                </article>
+                <article class="prediction-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Heart Disease Prediction</h3>
+                    <p>Comprehensive cardiovascular risk assessment.</p>
+                    <span class="accuracy">92% Accuracy</span>
+                </article>
+                <article class="prediction-card">
+                    <i class="fas fa-lungs"></i>
+                    <h3>Liver Disease Prediction</h3>
+                    <p>Advanced detection of liver-related conditions.</p>
+                    <span class="accuracy">90% Accuracy</span>
+                </article>
+                <article class="prediction-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Breast Cancer Prediction</h3>
+                    <p>Early detection of breast cancer risk factors.</p>
+                    <span class="accuracy">88% Accuracy</span>
+                </article>
+                <article class="prediction-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Parkinson's Disease Prediction</h3>
+                    <p>Analysis of Parkinson's disease risk factors.</p>
+                    <span class="accuracy">85% Accuracy</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="values">
+            <h2>Our Core Values</h2>
+            <div class="grid">
+                <article class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Patient-Centered</h3>
+                    <p>Everything we do is focused on improving patient outcomes and experiences.</p>
+                </article>
+                <article class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>We constantly push the boundaries of what's possible with AI in healthcare.</p>
+                </article>
+                <article class="value-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Trust</h3>
+                    <p>Transparency and security are at the core of everything we do.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="team">
+            <h2>Meet Our Team</h2>
+            <div class="grid">
+                <article class="team-card">
+                    <h3>Medical Professionals</h3>
+                    <p>Medical professionals who ensure our predictions are clinically accurate.</p>
+                </article>
+                <article class="team-card">
+                    <h3>AI Engineers</h3>
+                    <p>Data scientists and machine learning engineers who develop and maintain our AI models.</p>
+                </article>
+                <article class="team-card">
+                    <h3>Technical Team</h3>
+                    <p>Developers who build and maintain our secure, scalable platform.</p>
+                </article>
+            </div>
+        </section>
+
+
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

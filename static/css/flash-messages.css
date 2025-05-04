@@ -1,0 +1,51 @@
+/* Flash Messages Styling */
+.flash-messages-container {
+    position: absolute;
+    top: 100px;
+    right: 16px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.flash-message {
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.flash-message.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.flash-message.fade-out {
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.flash-message.flash-success {
+    background-color: #10b981;
+}
+
+.flash-message.flash-error {
+    background-color: #ef4444;
+}
+
+.flash-message.flash-warning {
+    background-color: #f59e0b;
+}
+
+.flash-message.flash-info {
+    background-color: #3b82f6;
+}
+

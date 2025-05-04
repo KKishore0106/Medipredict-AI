@@ -1,0 +1,577 @@
+/* About Page Styles - MediPredict AI */
+
+:root {
+    /* Color Scheme - Matching header/footer (#2563eb) */
+    --primary-color: #2563eb;
+    --primary-light: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #0ea5e9;
+    --secondary-light: #38bdf8;
+    --secondary-dark: #0284c7;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-light: #6b7280;
+    --background: #f9fafb;
+    --background-light: #ffffff;
+    --card-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.08);
+    
+    /* Disease Prediction Colors */
+    --diabetes-color: #ef4444; /* Updated: Made it more purple/distinctive */
+    --heart-color: #ef4444;
+    --liver-color: #10b981;
+    --cancer-color: #f59e0b;
+    --parkinsons-color: #8b5cf6;
+    
+    /* Typography */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.25rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 1.875rem;
+    --fs-4xl: 2.25rem;
+    --fs-5xl: 3rem;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem;
+    --space-lg: 1.25rem;
+    --space-xl: 1.75rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.5rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+  }
+  
+  /* Global Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg); /* Reduced side padding */
+    text-align: center; /* Center all content in container */
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 6rem 0 4rem; /* Reduced padding */
+    text-align: center;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0eeff 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before, .hero::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .hero::before {
+    top: -50%;
+    right: -50%;
+    transform: rotate(-10deg);
+  }
+  
+  .hero::after {
+    bottom: -50%;
+    left: -50%;
+    transform: rotate(10deg);
+  }
+  
+  .hero h1 {
+    font-size: var(--fs-5xl);
+    font-weight: 800;
+    margin-bottom: var(--space-lg); /* Reduced margin */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero .content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero .content h2 {
+    font-size: var(--fs-3xl);
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-lg); /* Reduced margin */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero .content p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl); /* Reduced margin */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: var(--fs-xl);
+    line-height: 1.6; /* Tighter line height */
+  }
+  
+
+  
+  /* Disease Predictions Section */
+  .disease-predictions {
+    padding: 4rem 0;
+    background-color: var(--background-light);
+    position: relative;
+  }
+  
+  .disease-predictions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    z-index: 0;
+  }
+  
+  .disease-predictions h2 {
+    text-align: center;
+    font-size: var(--fs-3xl);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-2xl);
+    position: relative;
+  }
+  
+  .disease-predictions h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--radius-full);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Prediction Cards */
+  .prediction-card, .value-card {
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prediction-card:nth-child(1) {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+
+  .prediction-card:nth-child(2) {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .prediction-card:nth-child(3) {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+
+  .prediction-card:nth-child(4) {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.2);
+  }
+
+  .prediction-card:nth-child(5) {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: rgba(14, 165, 233, 0.2);
+  }
+
+  .value-card:nth-child(1) {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+  }
+
+  .value-card:nth-child(2) {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: rgba(14, 165, 233, 0.2);
+  }
+
+  .value-card:nth-child(3) {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+  
+  .prediction-card:hover, .value-card:hover {
+    transform: translateY(-6px) rotateX(2deg);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+  }
+  
+  .prediction-card:hover::before {
+    opacity: 1;
+  }
+  
+  .prediction-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-light);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  
+  .prediction-card i {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-lg);
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: var(--space-md);
+    border-radius: var(--radius-full);
+  }
+  
+  /* Fix for missing icons */
+  .prediction-card i.fa-blood-drop::before,
+  .prediction-card i.fas.fa-diabetes::before {
+    content: "\f5e1"; /* Blood drop icon (fa-tint) */
+  }
+  
+  /* Icon colors for different diseases */
+  .prediction-card:nth-child(1) i {
+    color: var(--diabetes-color);
+    background: rgba(99, 102, 241, 0.1);
+  }
+  
+  .prediction-card:nth-child(2) i {
+    color: var(--heart-color);
+    background: rgba(239, 68, 68, 0.1);
+  }
+  
+  .prediction-card:nth-child(3) i {
+    color: var(--liver-color);
+    background: rgba(16, 185, 129, 0.1);
+  }
+  
+  .prediction-card:nth-child(4) i {
+    color: var(--cancer-color);
+    background: rgba(245, 158, 11, 0.1);
+  }
+  
+  .prediction-card:nth-child(5) i {
+    color: var(--parkinsons-color);
+    background: rgba(139, 92, 246, 0.1);
+  }
+  
+  .prediction-card:hover i {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+  }
+  
+  .prediction-card h3 {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .prediction-card p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .prediction-card .accuracy {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    color: white;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    font-size: var(--fs-sm);
+  }
+  
+  /* Values Section */
+  .values {
+    padding: 4rem 0;
+    background-color: var(--background);
+  }
+  
+  .values h2 {
+    text-align: center;
+    font-size: var(--fs-3xl);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-2xl);
+    position: relative;
+  }
+  
+  .values h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--radius-full);
+  }
+  
+  .value-card {
+    background: var(--background-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    text-align: center;
+  }
+  
+  .value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+  }
+  
+  .value-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: var(--radius-full);
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  /* Fix for missing innovation icon */
+  .value-card i.fa-innovation::before {
+    content: "\f0eb"; /* Light bulb icon (fa-lightbulb) */
+  }
+  
+  .value-card:hover i {
+    transform: translateY(-4px);
+    background: rgba(37, 99, 235, 0.2);
+  }
+  
+  .value-card h3 {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .value-card p {
+    color: var(--text-secondary);
+  }
+  
+  /* Team Section */
+  .team {
+    padding: 4rem 0;
+    background-color: var(--background-light);
+  }
+  
+  .team h2 {
+    text-align: center;
+    font-size: var(--fs-3xl);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-2xl);
+    position: relative;
+  }
+  
+  .team h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--radius-full);
+  }
+  
+  .team-card {
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-card:nth-child(1) {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+  }
+
+  .team-card:nth-child(2) {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: rgba(14, 165, 233, 0.2);
+  }
+
+  .team-card:nth-child(3) {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .team-card:nth-child(4) {
+    background: rgba(236, 72, 153, 0.1);
+    border-color: rgba(236, 72, 153, 0.2);
+  }
+  
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.15);
+    border-color: var(--primary-light);
+  }
+  
+  .team-card:hover::before {
+    opacity: 1;
+  }
+  
+  .team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-light);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  
+  .team-card h3 {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .team-card p {
+    color: var(--text-secondary);
+  }
+  
+ 
+  
+  /* Animations */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .prediction-card i, .value-card i {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    :root {
+      --fs-5xl: 2.5rem;
+      --fs-4xl: 2rem;
+      --fs-3xl: 1.75rem;
+      --fs-2xl: 1.5rem;
+    }
+    
+    .hero {
+      padding: 4rem 0 2.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    :root {
+      --fs-5xl: 2.25rem;
+      --fs-4xl: 1.875rem;
+      --fs-3xl: 1.5rem;
+      --fs-2xl: 1.25rem;
+      --fs-xl: 1.125rem;
+    }
+    
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-lg);
+    }
+    
+    .prediction-card, .value-card, .team-card {
+      padding: var(--space-lg);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    :root {
+      --fs-5xl: 2rem;
+      --fs-4xl: 1.75rem;
+      --fs-3xl: 1.375rem;
+    }
+    
+    .hero {
+      padding: 3rem 0 2rem;
+    }
+    
+    .disease-predictions, .values, .team {
+      padding: 3rem 0;
+    }
+    
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 0 var(--space-md);
+    }
+  }

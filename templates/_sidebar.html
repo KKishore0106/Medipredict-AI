@@ -1,0 +1,56 @@
+ <!-- Static Sidebar -->
+<nav class="sidebar">
+    <!-- Sidebar Toggle Button -->
+    <div class="sidebar-toggle">
+        <button id="sidebar-toggle-btn" class="toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="sidebar-content">
+        <!-- Logo Section -->
+        <div class="sidebar-logo">
+            <div class="logo-container flex flex-col items-center justify-center w-full">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text-container">
+                    <h1 class="logo-text text-white text-lg font-bold">MediPredict AI</h1>
+                    <p class="logo-subtext">Healthcare Intelligence</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}" 
+               class="nav-link {{ 'active' if request.endpoint == 'dashboard' }}">
+                <div class="nav-link-content">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a href="{{ url_for('prediction') }}" 
+               class="nav-link {{ 'active' if request.endpoint == 'prediction' }}">
+                <div class="nav-link-content">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Predictions summary</span>
+                </div>
+            </a>
+            <a href="{{ url_for('chat') }}" 
+               class="nav-link {{ 'active' if request.endpoint == 'chat' }}">
+                <div class="nav-link-content">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat with AI</span>
+                </div>
+            </a>
+            <a href="{{ url_for('settings') }}" 
+               class="nav-link {{ 'active' if request.endpoint == 'settings' }}">
+                <div class="nav-link-content">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</nav>
