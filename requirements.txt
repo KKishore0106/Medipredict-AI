@@ -9,6 +9,10 @@ gevent==23.7.0
 greenlet==3.0.2
 python-dotenv==1.0.0
 pytz==2023.3
+<<<<<<< HEAD
+=======
+
+>>>>>>> 44dc41f1fe8064d2d6e25af512ac3292bc5a5a22
 
 # Database
 groq==0.4.1
